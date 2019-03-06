@@ -3,10 +3,14 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/go-kit/kit/endpoint"
 	httptransport "github.com/go-kit/kit/transport/http"
 	"golang.org/x/net/context"
+
+	"github.com/go-kit/kit/ratelimit"
+    "golang.org/x/time/rate"
 )
 
 // Service
@@ -57,6 +61,10 @@ func main() {
 
 	var sep endpoint.Endpoint
 	sep = makeAddEndpoint(c)
+
+	// Rate limit
+	limit := rate.NewLimiter(rate.Every(time.Minute), 1)
+	sep = ratelimit.NewErroringLimiter(limit)(sep)
 
 	addHandler := httptransport.NewServer(
 		sep,
