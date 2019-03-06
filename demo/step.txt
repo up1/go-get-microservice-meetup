@@ -1,0 +1,18 @@
+## Step 1 : Download Go-kit library
+
+go get golang.org/x/net/context
+go get github.com/go-kit/kit/transport
+go get github.com/go-kit/kit/endpoint
+go get github.com/go-kit/kit/metrics
+go get github.com/go-kit/kit/ratelimit
+go get github.com/go-kit/kit/log
+go get github.com/go-kit/kit/circuitbreaker
+
+## Step 2.1 : Create service
+## Step 2.2 : Create endpoint
+## Step 2.3 : Create transport (HTTP)
+
+## Run
+curl  -X POST -d '{"value":1}' 'http://localhost:8080/add'
+{"value":1}
+
